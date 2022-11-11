@@ -6,7 +6,7 @@ from telegram import Update
 from telegram.ext import Updater, CallbackContext, CommandHandler, MessageHandler, Filters
 
 
-def send_message_to_dialog_flow(session_id, project_id, text, language_code = 'ru-RU'):
+def send_message_to_dialog_flow(session_id, project_id, text, language_code='ru-RU'):
     session_client = dialogflow.SessionsClient()
     session = session_client.session_path(project_id, session_id)
 
@@ -49,7 +49,6 @@ if __name__ == '__main__':
     chat_id = env.str('TG_USER_CHAT_ID')
     session_id = env.str('SESSION_ID')
     project_id = env.str('PROJECT_ID')
-
 
     updater = Updater(token=token)
     dispatcher = updater.dispatcher

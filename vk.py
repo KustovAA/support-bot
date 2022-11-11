@@ -7,7 +7,7 @@ import vk_api as vk
 from vk_api.longpoll import VkLongPoll, VkEventType
 
 
-def send_message_to_dialog_flow(session_id, project_id, text, language_code = 'ru-RU'):
+def send_message_to_dialog_flow(session_id, project_id, text, language_code='ru-RU'):
     session_client = dialogflow.SessionsClient()
     session = session_client.session_path(project_id, session_id)
 
@@ -29,12 +29,6 @@ def dialog(session_id, project_id, event, vk_api):
         vk_api.messages.send(
             user_id=event.user_id,
             message=dialog_flow_response,
-            random_id=random.randint(1, 1000)
-        )
-    else:
-        vk_api.messages.send(
-            user_id=event.user_id,
-            message='Не совсем понимаю, о чем ты.',
             random_id=random.randint(1, 1000)
         )
 

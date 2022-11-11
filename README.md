@@ -108,3 +108,5 @@ python vk.py
 ```
 python train_agent.py
 ```
+
+<img src="./dialog-example.gif" width="450" height="400" />

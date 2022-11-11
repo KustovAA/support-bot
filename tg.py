@@ -46,7 +46,6 @@ if __name__ == '__main__':
     env = Env()
     env.read_env()
     token = env.str('TG_BOT_TOKEN')
-    chat_id = env.str('TG_USER_CHAT_ID')
     session_id = env.str('SESSION_ID')
     project_id = env.str('PROJECT_ID')
 

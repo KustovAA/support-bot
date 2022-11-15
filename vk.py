@@ -9,14 +9,16 @@ from dialog_flow import get_answer_from_dialog_flow
 
 
 def answer(session_id, project_id, event, vk_api):
-    dialog_flow_response = get_answer_from_dialog_flow(session_id, project_id, event.text)
+    dialog_flow_answer, is_fallback = get_answer_from_dialog_flow(session_id, project_id, event.text)
 
-    if dialog_flow_response:
-        vk_api.messages.send(
-            user_id=event.user_id,
-            message=dialog_flow_response,
-            random_id=random.randint(1, 1000)
-        )
+    if is_fallback:
+        return
+
+    vk_api.messages.send(
+        user_id=event.user_id,
+        message=dialog_flow_answer,
+        random_id=random.randint(1, 1000)
+    )
 
 
 if __name__ == '__main__':

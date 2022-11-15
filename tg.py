@@ -13,12 +13,9 @@ def start(update: Update, context: CallbackContext):
 
 
 def answer(session_id, project_id, update: Update, context: CallbackContext):
-    dialog_flow_response = get_answer_from_dialog_flow(session_id, project_id, update.message.text)
+    dialog_flow_answer, is_fallback = get_answer_from_dialog_flow(session_id, project_id, update.message.text)
 
-    if dialog_flow_response:
-        update.message.reply_text(dialog_flow_response)
-    else:
-        update.message.reply_text('Не совсем понимаю, о чем ты.')
+    update.message.reply_text(dialog_flow_answer)
 
 
 if __name__ == '__main__':

@@ -32,8 +32,8 @@ if __name__ == '__main__':
     env = Env()
     env.read_env()
     token = env.str('TG_BOT_TOKEN')
-    session_id = env.str('SESSION_ID')
-    project_id = env.str('PROJECT_ID')
+    session_id = env.str('TG_DIALOG_FLOW_SESSION_ID')
+    project_id = env.str('DIALOG_FLOW_PROJECT_ID')
 
     updater = Updater(token=token)
     dispatcher = updater.dispatcher

@@ -28,8 +28,8 @@ if __name__ == '__main__':
     env = Env()
     env.read_env()
     token = env.str('VK_ACCESS_TOKEN')
-    session_id = env.str('SESSION_ID')
-    project_id = env.str('PROJECT_ID')
+    session_id = env.str('VK_DIALOG_FLOW_SESSION_ID')
+    project_id = env.str('DIALOG_FLOW_PROJECT_ID')
 
     vk_session = vk.VkApi(token=token)
     vk_api = vk_session.get_api()

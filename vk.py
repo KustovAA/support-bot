@@ -2,28 +2,14 @@ import logging
 import random
 
 from environs import Env
-from google.cloud import dialogflow
 import vk_api as vk
 from vk_api.longpoll import VkLongPoll, VkEventType
 
-
-def send_message_to_dialog_flow(session_id, project_id, text, language_code='ru-RU'):
-    session_client = dialogflow.SessionsClient()
-    session = session_client.session_path(project_id, session_id)
-
-    text_input = dialogflow.TextInput(text=text, language_code=language_code)
-
-    query_input = dialogflow.QueryInput(text=text_input)
-
-    response = session_client.detect_intent(
-        request={"session": session, "query_input": query_input},
-    )
-
-    return response.query_result.fulfillment_text
+from dialog_flow import get_answer_from_dialog_flow
 
 
 def dialog(session_id, project_id, event, vk_api):
-    dialog_flow_response = send_message_to_dialog_flow(session_id, project_id, event.text)
+    dialog_flow_response = get_answer_from_dialog_flow(session_id, project_id, event.text)
 
     if dialog_flow_response:
         vk_api.messages.send(

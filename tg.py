@@ -1,24 +1,10 @@
 import logging
 
 from environs import Env
-from google.cloud import dialogflow
 from telegram import Update
 from telegram.ext import Updater, CallbackContext, CommandHandler, MessageHandler, Filters
 
-
-def send_message_to_dialog_flow(session_id, project_id, text, language_code='ru-RU'):
-    session_client = dialogflow.SessionsClient()
-    session = session_client.session_path(project_id, session_id)
-
-    text_input = dialogflow.TextInput(text=text, language_code=language_code)
-
-    query_input = dialogflow.QueryInput(text=text_input)
-
-    response = session_client.detect_intent(
-        request={"session": session, "query_input": query_input},
-    )
-
-    return response.query_result.fulfillment_text
+from dialog_flow import get_answer_from_dialog_flow
 
 
 def start(update: Update, context: CallbackContext):
@@ -27,7 +13,7 @@ def start(update: Update, context: CallbackContext):
 
 def get_dialog(session_id, project_id):
     def dialog(update: Update, context: CallbackContext):
-        dialog_flow_response = send_message_to_dialog_flow(session_id, project_id, update.message.text)
+        dialog_flow_response = get_answer_from_dialog_flow(session_id, project_id, update.message.text)
 
         if dialog_flow_response:
             update.message.reply_text(dialog_flow_response)

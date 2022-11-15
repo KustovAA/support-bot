@@ -8,7 +8,7 @@ from vk_api.longpoll import VkLongPoll, VkEventType
 from dialog_flow import get_answer_from_dialog_flow
 
 
-def dialog(session_id, project_id, event, vk_api):
+def answer(session_id, project_id, event, vk_api):
     dialog_flow_response = get_answer_from_dialog_flow(session_id, project_id, event.text)
 
     if dialog_flow_response:
@@ -37,4 +37,4 @@ if __name__ == '__main__':
 
     for event in longpoll.listen():
         if event.type == VkEventType.MESSAGE_NEW and event.to_me:
-            dialog(session_id, project_id, event, vk_api)
+            answer(session_id, project_id, event, vk_api)

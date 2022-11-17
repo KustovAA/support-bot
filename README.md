@@ -14,8 +14,7 @@ pipenv install
 ### Переменные окружения:
 ```
 TG_BOT_TOKEN - токет телеграм бота
-SESSION_ID - id сессии для DialogFlow (подойдет любое значение)
-PROJECT_ID - id проекта в DialogFlow
+DIALOG_FLOW_PROJECT_ID - id проекта в DialogFlow
 GOOGLE_APPLICATION_CREDENTIALS - путь до google cloud credentials
 VK_ACCESS_TOKEN - токен сообщества в vk
 ```

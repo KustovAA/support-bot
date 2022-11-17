@@ -30,7 +30,6 @@ if __name__ == '__main__':
     env = Env()
     env.read_env()
     token = env.str('VK_ACCESS_TOKEN')
-    session_id = random.randint(100000, 1000000)
     project_id = env.str('DIALOG_FLOW_PROJECT_ID')
 
     vk_session = vk.VkApi(token=token)
@@ -39,4 +38,4 @@ if __name__ == '__main__':
 
     for event in longpoll.listen():
         if event.type == VkEventType.MESSAGE_NEW and event.to_me:
-            answer(session_id, project_id, event, vk_api)
+            answer(event.user_id, project_id, event, vk_api)

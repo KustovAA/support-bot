@@ -12,8 +12,8 @@ def start(update: Update, context: CallbackContext):
     context.bot.send_message(chat_id=update.effective_chat.id, text="Здравствуйте")
 
 
-def answer(session_id, project_id, update: Update, context: CallbackContext):
-    dialog_flow_answer, is_fallback = get_answer_from_dialog_flow(session_id, project_id, update.message.text)
+def answer(project_id, update: Update, context: CallbackContext):
+    dialog_flow_answer, is_fallback = get_answer_from_dialog_flow(update.effective_chat.id, project_id, update.message.text)
 
     update.message.reply_text(dialog_flow_answer)
 
@@ -27,7 +27,6 @@ if __name__ == '__main__':
     env = Env()
     env.read_env()
     token = env.str('TG_BOT_TOKEN')
-    session_id = env.str('TG_DIALOG_FLOW_SESSION_ID')
     project_id = env.str('DIALOG_FLOW_PROJECT_ID')
 
     updater = Updater(token=token)
@@ -38,7 +37,6 @@ if __name__ == '__main__':
 
     dialog_handler = MessageHandler(Filters.text & ~Filters.command, partial(
         answer,
-        session_id,
         project_id
     ))
     dispatcher.add_handler(dialog_handler)
